@@ -1,21 +1,32 @@
+import { useParams } from 'react-router-dom';
+import { useState,useEffect } from 'react';
+import  axios from 'axios';
 export default function SessionScreen(){
+
+    const params = useParams();
+    const id = params.idFilme;
+    const [filme,setFilme] = useState([]);
+
+    useEffect(() => {
+		const requisicao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/movies/${id}/showtimes`);
+
+		requisicao.then(resposta => {
+			setFilme(resposta.data.days);
+		});
+	}, []);
+
+
     return(
         <div className="session">
             <h1 className="titulo">Selecione o horário</h1>
-            <div className="dia">
-                <h2>Quinta-feira - 24/06/2021</h2>
-                <div className="horarios">
-                    <button>15:00</button>
-                    <button>16:00</button>
-                </div>
-            </div>
-            <div className="dia">
-                <h2>Sexta-feira - 25/06/2021</h2>
-                <div className="horarios">
-                    <button>15:00</button>
-                    <button>19:00</button>
-                </div>
-            </div>
+            {filme.map((sessao)=>
+                        <div className="dia">
+                        <h2>{sessao.weekday} {sessao.date}</h2>
+                            <div className="horarios">
+                                {sessao.showtimes.map((hora)=> <button>{hora.name}</button>)}
+                            </div>
+                        </div>
+            )}
         </div>
     );
 }

@@ -47,6 +47,10 @@ body{
     margin-top: 10px;
 }
 
+.filme img {
+    width: 129px;
+    height: 193px;
+}
 .contentMovies {
     display: flex;
     flex-wrap: wrap;
