@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import {Link, link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export default function ContentMovies(){
     const [filmes,setFilmes] = useState([]);

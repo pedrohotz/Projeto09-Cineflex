@@ -1,19 +1,41 @@
 
+import { useParams, Link } from 'react-router-dom';
+import { useState,useEffect } from 'react';
+import  axios from 'axios';
+
 export default function Chairs(){
+    const params = useParams();
+    const id = params.idSessao;
+    const [assentos,setAssentos] = useState([]);
+    useEffect(() => { 
+		const requisicao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${id}/seats`);
+
+		requisicao.then(resposta => {
+			setAssentos(resposta.data.seats);
+       
+		});
+	}, []);
+
+
+    console.log(assentos);
+
     return(
     <div className="chairs">
             <h1 className="titulo">Seleciona o(s) assento(s)</h1>
             <div className="assentos">
-            <Assento />
-            <Assento />
-            <Assento />
-            <Assento />
-            <Assento />
-            <Assento />
-            <Assento />
-            <Assento />
-            <Assento />
-            <Assento /> 
+                {assentos.map((assento) => 
+                {if(assento.isAvailable === false){
+                    return(
+                        <button className="assento indisponivel">{assento.id}</button>
+                    );
+                }
+                else{
+                    return(
+                        <button className="assento">{assento.id}</button>
+                    )
+                }
+                    }
+                )}
             </div>
         <div className="botoes">
             <div className="botao">
@@ -44,9 +66,3 @@ export default function Chairs(){
     );
 }
 
-
-function Assento(){
-    return(
-        <button className="assento">1</button>
-    );
-}
