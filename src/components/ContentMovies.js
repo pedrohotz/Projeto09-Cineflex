@@ -11,10 +11,11 @@ export default function ContentMovies(){
 
 		requisicao.then(resposta => {
 			setFilmes([...resposta.data]);
+            
 		});
 	}, []);
 
-
+    console.log(filmes);
     return(
         <div className="filmes">
             <h1 className="titulo">Selecione o filme</h1>

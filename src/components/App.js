@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useState } from "react";
 import Top from "./Top";
 import ContentMovies from "./ContentMovies";
 import SessionScreen from "./SessionScreen";
@@ -8,7 +9,12 @@ import Succes from "./Sucess";
 import "../css/reset.css";
 import "../css/style.css";
 
-export default function App(){
+export default function App(){  
+    const[compra,setCompra] = useState({});
+    const[sessao,setSessao] = useState({});
+    const [arrayAssento, setAssento] = useState([]);
+    console.log(sessao);
+    console.log(arrayAssento);
     return(
     <>
         <Top />
@@ -21,10 +27,10 @@ export default function App(){
                     <SessionScreen />
                 </Route>
                 <Route path="/assentos/:idSessao" exact>
-                    <Chairs />
+                    <Chairs compra={compra} setCompra={setCompra} setSessao={setSessao} setAssento={setAssento} arrayAssento={arrayAssento} />
                 </Route>
                 <Route path="/sucesso" exact>
-                    <Succes/>
+                    <Succes sessao={sessao} compra={compra} arrayAssento={arrayAssento}/>
                 </Route>
             </Switch>
         </BrowserRouter>

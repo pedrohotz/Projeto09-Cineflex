@@ -1,27 +1,32 @@
 
+import { useHistory } from "react-router";
+export default function Succes(props){
+    let history = useHistory();
 
-export default function Succes(){
+    function VoltarHome(){
+        history.push("/");
+    }
+    
     return(
         <div className="sucess">
             <h1>Pedido feito com sucesso!</h1>
             <div className="dados">
                 <div className="data">
                     <h2>Filme e sessão</h2>
-                    <span>Enola Holmes</span>
-                    <span>24/06/2021 15:00</span>
+                    <span>{props.sessao.filme}</span>
+                    <span>{props.sessao.data} {props.sessao.hora}</span>
                 </div>
                 <div className="data">
                     <h2>Ingressos</h2>
-                    <span>Assento 15</span>
-                    <span>Assento 16</span>
+                    {props.arrayAssento.map((assento) => <span>Assento {assento}</span>)}
                 </div>
                 <div className="data">
                     <h2>Comprador</h2>
-                    <span>Nome: João da Silva Sauro</span>
-                    <span>CPF:123.456.789-10</span>
+                    <span>Nome: {props.compra.name}</span>
+                    <span>CPF:{props.compra.cpf}</span>
                 </div>
             </div>
-            <button>Voltar para o home</button>
+            <button onClick={VoltarHome}>Voltar para o home</button>
         </div>
     );
 }

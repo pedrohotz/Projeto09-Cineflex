@@ -15,7 +15,6 @@ export default function SessionScreen(){
 		});
 	}, []);
 
-    console.log(filme);
     return(
         <div className="session">
             <h1 className="titulo">Selecione o horário</h1>
