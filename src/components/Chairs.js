@@ -29,18 +29,17 @@ export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssen
 
 			setAssentos(resposta.data.seats);
             setSessao({filme:resposta.data.movie.title,data:resposta.data.day.date,hora:resposta.data.name});
-            console.log(resposta.data)
             setTitle(resposta.data.movie.title);
             setDia(resposta.data.day.weekday);
             setURL(resposta.data.movie.posterURL);
             setHora(resposta.data.name);
+            setCompra({ids:arraySelecionado,name:nomeComprador,cpf:cpfComprador})
 		});
 	}, []); 
 
 
     
     function Reservar(){
-        
         setCompra({ids:arraySelecionado,name:nomeComprador,cpf:cpfComprador})
         if(!!nomeComprador && !!cpfComprador && arraySelecionado.length > 0){
         const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/seats/book-many",compra);
