@@ -2,6 +2,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import  axios from 'axios';
+import Rodape from './Rodape';
 
 export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssento}){
     
@@ -12,6 +13,7 @@ export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssen
     const[arraySelecionado,setArrSelecionado] = useState([]);
     const [nomeComprador,setNome] = useState("");
     const [cpfComprador, setCPF] = useState("");
+    const [dados,setDados] = useState([]);
    
     function Succes(){
         history.push("/sucesso");
@@ -23,11 +25,12 @@ export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssen
 
 			setAssentos(resposta.data.seats);
             setSessao({filme:resposta.data.movie.title,data:resposta.data.day.date,hora:resposta.data.name});
+            setDados(resposta.data);
 		});
 	}, []); 
 
 
-
+    console.log(dados);
     function Reservar(){
         
         setCompra({ids:arraySelecionado,name:nomeComprador,cpf:cpfComprador})
@@ -73,6 +76,7 @@ export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssen
            </div>
         </div>
         <button className="reserva" onClick={Reservar}>Reservar assento(s)</button>
+        <Rodape imgUrl={dados.movie.posterURL} title={dados.movie.title} dia={dados.day.weekday} hora={dados.name}/>
     </div>
     );
 }

@@ -106,6 +106,7 @@ body{
     align-items: center;
     margin-top: 100px;
     justify-content: space-around;
+    margin-bottom: 130px;
 }
 
 .assento {
@@ -241,4 +242,39 @@ body{
 .data span {
     font-size: 22px;
     letter-spacing: 0.04em;
+}
+
+.rodape {
+    display: flex;
+    background-color: #DFE6ED;
+    align-items: center;
+    justify-content: flex-start;
+    height: 117px;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.rodape h1{
+    font-size: 22px;
+    font-family: 'Roboto',sans-serif;
+    color: #293845;
+}
+
+.imgFilme {
+    width: 64px;
+    height: 89px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.imgFilme img {
+    width: 48px;
+    height: 72px;
 }
