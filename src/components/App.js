@@ -13,8 +13,6 @@ export default function App(){
     const[compra,setCompra] = useState({});
     const[sessao,setSessao] = useState({});
     const [arrayAssento, setAssento] = useState([]);
-    console.log(sessao);
-    console.log(arrayAssento);
     return(
     <>
         <Top />

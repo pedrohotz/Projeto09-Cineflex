@@ -18,7 +18,6 @@ export default function SessionScreen(){
 		});
 	}, []);
 
-    console.log(dados);
     return(
         <div className="session">
             <h1 className="titulo">Selecione o horário</h1>
@@ -35,7 +34,7 @@ export default function SessionScreen(){
                             </div>
                         </div>
             )}
-        <Rodape imgUrl={dados.posterURL} title={dados.title} />
+        <Rodape imgURL={dados.posterURL} title={dados.title} />
         </div>
     );
 }

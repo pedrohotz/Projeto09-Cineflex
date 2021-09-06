@@ -13,24 +13,32 @@ export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssen
     const[arraySelecionado,setArrSelecionado] = useState([]);
     const [nomeComprador,setNome] = useState("");
     const [cpfComprador, setCPF] = useState("");
-    const [dados,setDados] = useState([]);
+    const [nome,setTitle ]= useState("");
+    const [dia,setDia] = useState("");
+    const [url,setURL] = useState("");
+    const [hora,setHora] = useState("");
+    
    
     function Succes(){
         history.push("/sucesso");
     }
-    
+
     useEffect(() => { 
 		const requisicao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${id}/seats`);
 		requisicao.then(resposta => {
 
 			setAssentos(resposta.data.seats);
             setSessao({filme:resposta.data.movie.title,data:resposta.data.day.date,hora:resposta.data.name});
-            setDados(resposta.data);
+            console.log(resposta.data)
+            setTitle(resposta.data.movie.title);
+            setDia(resposta.data.day.weekday);
+            setURL(resposta.data.movie.posterURL);
+            setHora(resposta.data.name);
 		});
 	}, []); 
 
 
-    console.log(dados);
+    
     function Reservar(){
         
         setCompra({ids:arraySelecionado,name:nomeComprador,cpf:cpfComprador})
@@ -41,11 +49,8 @@ export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssen
     
     }
 
-
-
-
-
-    return(
+    
+return(
     <div className="chairs">
             <h1 className="titulo">Seleciona o(s) assento(s)</h1>
             <div className="assentos">
@@ -76,10 +81,11 @@ export default function Chairs({compra,setCompra,setSessao,arrayAssento,setAssen
            </div>
         </div>
         <button className="reserva" onClick={Reservar}>Reservar assento(s)</button>
-        <Rodape imgUrl={dados.movie.posterURL} title={dados.movie.title} dia={dados.day.weekday} hora={dados.name}/>
+        <Rodape title={nome} imgURL={url} dia={dia} hora={hora} />
     </div>
-    );
+)
 }
+
 
 function Assento({id,name,arraySelecionado,setArrSelecionado,disponivel,setAssento,arrayAssento}){
 
